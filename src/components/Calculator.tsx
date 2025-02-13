@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import { tasa_dolar } from '@/lib/tasas'
 import { PillMount } from './PillMount'
 import { Container } from './SectionContainer'
@@ -12,6 +14,14 @@ const tasaEnparalelo = await tasa_dolar('enparalelovzla')
 const tasaCentral = await tasa_dolar('bcv')
 
 export function Calculator() {
+	// Estado para manejar la tasa seleccionada
+	const [selectedRate, setSelectedRate] = useState(tasaCentral)
+
+	// Función para cambiar la tasa al hacer clic
+	const handleSelectRate = (rate: number) => {
+		setSelectedRate(rate)
+	}
+
 	return (
 		<Container>
 			<div className='flex flex-col gap-1 z-[1]'>
@@ -24,22 +34,30 @@ export function Calculator() {
 
 			<section className='flex justify-center mt-2'>
 				<ul className='grid grid-cols-2 rounded-lg gap-x-2'>
-					<PillMount id='BCV' value={tasaCentral} name='BCV' title='BCV' />
+					<PillMount
+						id='BCV'
+						value={tasaCentral}
+						name='BCV'
+						title='BCV'
+						onClick={() => handleSelectRate(tasaCentral)}
+					/>
 
 					<PillMount
 						id='Paralelo'
 						value={tasaEnparalelo}
 						name='Paralelo'
 						title='Paralelo'
+						onClick={() => handleSelectRate(tasaEnparalelo)}
 					/>
 				</ul>
 			</section>
+
 			<article className='text-center text-accent md:my-2 my-3 items-center flex flex-col'>
 				<p
 					className='text-5xl md:text-6xl font-semibold text-primario'
 					id='mount'
 				>
-					Bs.S <strong>{tasaCentral}</strong>
+					Bs.S <strong>{selectedRate}</strong>
 				</p>
 				<p className='text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs'>
 					Última actualización <br />
