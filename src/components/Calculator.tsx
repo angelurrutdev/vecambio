@@ -65,7 +65,7 @@ export function Calculator() {
 						{setCurrencyDollar.monitors.bcv.last_update}
 					</strong>
 				</p>
-				<CopyButton id='btn-copy-convert' />
+				<CopyButton id='mount' />
 			</article>
 
 			<form className='dark:bg-tertiary bg-secondary-white border-t dark:border-t-secondary border-t-primary-white grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center'>
