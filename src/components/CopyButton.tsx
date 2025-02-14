@@ -18,6 +18,7 @@ export function CopyButton({ id }: { id: string }) {
 		<button
 			onClick={handleCopy}
 			className='
+			cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-500
         text-neutral-500 hover:text-neutral-700 dark:text-neutral-300
         inline-flex items-center space-x-3 justify-center whitespace-nowrap
         rounded-md text-sm font-medium transition-colors focus-visible:outline-none
