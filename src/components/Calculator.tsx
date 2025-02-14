@@ -7,6 +7,7 @@ import { CopyButton } from './CopyButton'
 import { getCurrency } from '@/lib/index'
 import { UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
+import { InputContainer } from './InputContainer'
 
 // Obtención de tasas y moneda
 const setCurrencyDollar = await getCurrency('dollar')
@@ -258,62 +259,27 @@ export function Calculator() {
 			</article>
 
 			<form className='dark:bg-tertiary bg-secondary-white border-t dark:border-t-secondary border-t-primary-white grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center'>
-				<div className='flex flex-col mb-2 md:mb-0'>
-					<label
-						htmlFor='dolares'
-						className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold text-secondary dark:text-white'
-					>
-						<UnitedStatesIcon />
-						Dólares
-					</label>
-					<div className='relative'>
-						<label
-							htmlFor='dolares'
-							className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4'
-						>
-							$
-						</label>
-						<input
-							className='text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-10 dark:bg-raisin-black'
-							id='dolares'
-							type='text'
-							placeholder='1.00'
-							autoComplete='off'
-							spellCheck='false'
-							value={usdValue}
-							onChange={handleUsdChange}
-						/>
-					</div>
-				</div>
+				<InputContainer
+					className='pl-10'
+					for_currency={'dolares'}
+					icon={<UnitedStatesIcon />}
+					label_currency={'$'}
+					placeholder_input={'1.00'}
+					value={usdValue}
+					label_title='Dolares'
+					handleChange={handleUsdChange}
+				/>
 
-				<div className='flex flex-col mb-2 md:mb-0'>
-					<label
-						htmlFor='bolivares'
-						className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white'
-					>
-						<VenezuelaIcon />
-						Bolívares
-					</label>
-					<div className='relative'>
-						<label
-							htmlFor='bolivares'
-							className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4'
-						>
-							Bs.S
-						</label>
-						<input
-							className='text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-20 dark:bg-raisin-black'
-							id='bolivares'
-							name='value'
-							type='text'
-							placeholder={String(setCurrencyDollar.monitors.bcv.price)}
-							autoComplete='off'
-							spellCheck='false'
-							value={vesValue}
-							onChange={handleVesChange}
-						/>
-					</div>
-				</div>
+				<InputContainer
+					className='pl-20'
+					for_currency='bolivares'
+					icon={<VenezuelaIcon />}
+					label_currency='Bs.S'
+					placeholder_input={String(setCurrencyDollar.monitors.bcv.price)}
+					value={vesValue}
+					label_title='Bolívares'
+					handleChange={handleVesChange}
+				/>
 			</form>
 
 			<p className='text-neutral-400 text-sm text-center'>
