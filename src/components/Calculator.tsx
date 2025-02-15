@@ -1,20 +1,28 @@
 'use client'
 import { useState } from 'react'
-import { tasa_dolar } from '@/lib/tasas'
 import { PillMount } from './PillMount'
 import { Container } from './SectionContainer'
 import { CopyButton } from './CopyButton'
-import { getCurrency } from '@/lib/index'
 import { UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
 import { InputContainer } from './InputContainer'
 
-// Obtención de tasas y moneda
-const setCurrencyDollar = await getCurrency('dollar')
-const rawTasaEnparalelo = await tasa_dolar('enparalelovzla')
-const rawTasaCentral = await tasa_dolar('bcv')
+/* Definición de las props que recibirá el componente. 
+   Puedes ajustar los tipos según la estructura exacta de los datos */
+type CalculatorProps = {
+	setCurrencyDollar: {
+		monitors: {
+			bcv: {
+				last_update: string
+				price: string
+			}
+		}
+	}
+	rawTasaEnparalelo: string
+	rawTasaCentral: string
+}
 
-// Función para parsear la tasa a número (BCV/Paralelo)
+// Función para parsear la tasa (BCV/Paralelo)
 function parseRate(val: string): number {
 	if (typeof val === 'number') return val
 	if (typeof val === 'string') {
@@ -25,91 +33,21 @@ function parseRate(val: string): number {
 	return 0
 }
 
-// Convertimos las tasas a number
-const tasaEnparalelo = parseRate(rawTasaEnparalelo) // p.e. 76.97
-const tasaCentral = parseRate(rawTasaCentral) // p.e. 61.82
+export default function Calculator({
+	setCurrencyDollar,
+	rawTasaEnparalelo,
+	rawTasaCentral,
+}: CalculatorProps) {
+	// Convertimos las tasas a number
+	const tasaEnparalelo = parseRate(rawTasaEnparalelo)
+	const tasaCentral = parseRate(rawTasaCentral)
 
-// ---------------------------------------------------------
-// 1. Helpers para formatear el valor que ingresa el usuario
-// ---------------------------------------------------------
-
-/**
- * Formatea un valor numérico ingresado como string.
- * - Elimina todo lo que no sea dígito.
- * - Asume que los dos últimos dígitos son centavos.
- * - Agrega separadores de miles a la parte entera.
- * @param inputValue   Valor ingresado.
- * @param decimal      Carácter que se usará como separador decimal ('.' ó ',').
- * @param thousands    Carácter que se usará como separador de miles (',' ó '.').
- */
-function formatCurrencyInput(
-	inputValue: string,
-	decimal: string,
-	thousands: string,
-): string {
-	// Eliminar todo lo que no sean dígitos
-	const cleanedValue = inputValue.replace(/[^0-9]/g, '')
-	if (cleanedValue === '') {
-		return '0' + decimal + '00'
-	}
-
-	// Se asume que los dos últimos dígitos son los centavos
-	const amount = cleanedValue.length > 2 ? cleanedValue.slice(0, -2) : '0'
-	// Si cleanedValue es '5', por ejemplo, lo interpretamos como 0.05
-	const cents =
-		cleanedValue.length > 2
-			? cleanedValue.slice(-2)
-			: cleanedValue.padStart(2, '0')
-
-	const integerPart = removeLeadingZeros(amount)
-	const formattedAmount = addThousandSeparators(integerPart, thousands)
-
-	return `${formattedAmount}${decimal}${cents}`
-}
-
-/** Elimina ceros a la izquierda convirtiendo a número y de vuelta a string */
-function removeLeadingZeros(cadena: string): string {
-	return String(parseInt(cadena, 10))
-}
-
-/**
- * Inserta el carácter `thousands` como separador de miles.
- * Por ejemplo, si thousands = ',', convierte "1234" en "1,234".
- */
-function addThousandSeparators(numberStr: string, thousands: string): string {
-	return numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, thousands)
-}
-
-/**
- * Convierte un string formateado a número flotante.
- * - Remueve los separadores de miles.
- * - Convierte el separador decimal a '.' para poder usar parseFloat.
- */
-function parseFormattedCurrency(
-	formatted: string,
-	decimal: string,
-	thousands: string,
-): number {
-	// Primero removemos los separadores de miles
-	let normalized = formatted.replace(new RegExp(`\\${thousands}`, 'g'), '')
-	// Luego, si el separador decimal no es '.', lo convertimos
-	if (decimal !== '.') {
-		normalized = normalized.replace(decimal, '.')
-	}
-	return parseFloat(normalized)
-}
-
-// ---------------------
-// Componente Calculator
-// ---------------------
-export function Calculator() {
 	// Estados
 	const [selectedRate, setSelectedRate] = useState<number>(tasaCentral)
 	const [usdValue, setUsdValue] = useState<string>('')
 	const [vesValue, setVesValue] = useState<string>('')
 
 	// Estado para mostrar el resultado de la conversión.
-	// Si no hay nada ingresado, mostramos la tasa actual por defecto.
 	const [conversionResult, setConversionResult] = useState<string>(
 		`Bs.S ${selectedRate}`,
 	)
@@ -118,7 +56,6 @@ export function Calculator() {
 	const handleSelectRate = (rate: number) => {
 		setSelectedRate(rate)
 
-		// Si el input de USD tiene contenido, se convierte de USD a VES
 		if (usdValue.trim() !== '') {
 			const num = parseFormattedCurrency(usdValue, '.', ',')
 			if (!isNaN(num)) {
@@ -129,9 +66,7 @@ export function Calculator() {
 				}).format(result)
 				setConversionResult(formatted)
 			}
-		}
-		// Si el input de VES tiene contenido, se convierte de VES a USD
-		else if (vesValue.trim() !== '') {
+		} else if (vesValue.trim() !== '') {
 			const num = parseFormattedCurrency(vesValue, ',', '.')
 			if (!isNaN(num) && rate !== 0) {
 				const result = num / rate
@@ -141,36 +76,28 @@ export function Calculator() {
 				}).format(result)
 				setConversionResult(formatted)
 			}
-		}
-		// Si ninguno tiene contenido, se muestra el valor por defecto de la tasa
-		else {
+		} else {
 			setConversionResult(`Bs.S ${rate}`)
 		}
 	}
 
 	// --------------------
-	// 2. Input de USD
+	// 1. Input de USD
 	// --------------------
 	const handleUsdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const rawValue = e.target.value
-
-		// Formateamos para que:
-		//   - "." sea decimal
-		//   - "," sea miles
+		// Formateamos para que "." sea decimal y "," miles
 		const formattedValue = formatCurrencyInput(rawValue, '.', ',')
 		setUsdValue(formattedValue)
 		setVesValue('')
 
 		if (rawValue.trim() === '') {
-			// Si el input está vacío
 			setConversionResult(`Bs.S ${selectedRate}`)
 			return
 		}
 
-		// Convertimos el string formateado a número real
 		const num = parseFormattedCurrency(formattedValue, '.', ',')
 		if (!isNaN(num) && !isNaN(selectedRate)) {
-			// Conversión de USD a VES
 			const result = num * selectedRate
 			const formatted = new Intl.NumberFormat('es-VE', {
 				style: 'currency',
@@ -183,14 +110,11 @@ export function Calculator() {
 	}
 
 	// --------------------
-	// 3. Input de VES
+	// 2. Input de VES
 	// --------------------
 	const handleVesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const rawValue = e.target.value
-
-		// Formateamos para que:
-		//   - "," sea decimal
-		//   - "." sea miles
+		// Formateamos para que "," sea decimal y "." miles
 		const formattedValue = formatCurrencyInput(rawValue, ',', '.')
 		setVesValue(formattedValue)
 		setUsdValue('')
@@ -202,7 +126,6 @@ export function Calculator() {
 
 		const num = parseFormattedCurrency(formattedValue, ',', '.')
 		if (!isNaN(num) && !isNaN(selectedRate) && selectedRate !== 0) {
-			// Conversión de VES a USD
 			const result = num / selectedRate
 			const formatted = new Intl.NumberFormat('en-US', {
 				style: 'currency',
@@ -212,6 +135,54 @@ export function Calculator() {
 		} else {
 			setConversionResult(`Bs.S ${selectedRate}`)
 		}
+	}
+
+	// ---------------------------------------------------------
+	// Helpers para formatear y parsear valores de entrada
+	// ---------------------------------------------------------
+
+	function formatCurrencyInput(
+		inputValue: string,
+		decimal: string,
+		thousands: string,
+	): string {
+		// Eliminar todo lo que no sean dígitos
+		const cleanedValue = inputValue.replace(/[^0-9]/g, '')
+		if (cleanedValue === '') {
+			return '0' + decimal + '00'
+		}
+
+		// Se asume que los dos últimos dígitos son los centavos
+		const amount = cleanedValue.length > 2 ? cleanedValue.slice(0, -2) : '0'
+		const cents =
+			cleanedValue.length > 2
+				? cleanedValue.slice(-2)
+				: cleanedValue.padStart(2, '0')
+
+		const integerPart = removeLeadingZeros(amount)
+		const formattedAmount = addThousandSeparators(integerPart, thousands)
+
+		return `${formattedAmount}${decimal}${cents}`
+	}
+
+	function removeLeadingZeros(cadena: string): string {
+		return String(parseInt(cadena, 10))
+	}
+
+	function addThousandSeparators(numberStr: string, thousands: string): string {
+		return numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, thousands)
+	}
+
+	function parseFormattedCurrency(
+		formatted: string,
+		decimal: string,
+		thousands: string,
+	): number {
+		let normalized = formatted.replace(new RegExp(`\\${thousands}`, 'g'), '')
+		if (decimal !== '.') {
+			normalized = normalized.replace(decimal, '.')
+		}
+		return parseFloat(normalized)
 	}
 
 	return (
