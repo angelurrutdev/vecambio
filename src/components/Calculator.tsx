@@ -1,22 +1,194 @@
-import { tasa_dolar } from '@/lib/tasas'
+'use client'
+import { useState } from 'react'
 import { PillMount } from './PillMount'
 import { Container } from './SectionContainer'
 import { CopyButton } from './CopyButton'
-import { getCurrency } from '@/lib/index'
 import { UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
+import { InputContainer } from './InputContainer'
 
-const setCurrencyDollar = await getCurrency('dollar')
+/* Definición de las props que recibirá el componente. 
+   Puedes ajustar los tipos según la estructura exacta de los datos */
+type CalculatorProps = {
+	setCurrencyDollar: {
+		monitors: {
+			bcv: {
+				last_update: string
+				price: string
+			}
+		}
+	}
+	rawTasaEnparalelo: string
+	rawTasaCentral: string
+}
 
-const tasaEnparalelo = await tasa_dolar('enparalelovzla')
-const tasaCentral = await tasa_dolar('bcv')
+// Función para parsear la tasa (BCV/Paralelo)
+function parseRate(val: string): number {
+	if (typeof val === 'number') return val
+	if (typeof val === 'string') {
+		const replaced = val.replace(',', '.')
+		const parsed = parseFloat(replaced)
+		return isNaN(parsed) ? 0 : parsed
+	}
+	return 0
+}
 
-export function Calculator() {
+export default function Calculator({
+	setCurrencyDollar,
+	rawTasaEnparalelo,
+	rawTasaCentral,
+}: CalculatorProps) {
+	// Convertimos las tasas a number
+	const tasaEnparalelo = parseRate(rawTasaEnparalelo)
+	const tasaCentral = parseRate(rawTasaCentral)
+
+	// Estados
+	const [selectedRate, setSelectedRate] = useState<number>(tasaCentral)
+	const [usdValue, setUsdValue] = useState<string>('')
+	const [vesValue, setVesValue] = useState<string>('')
+
+	// Estado para mostrar el resultado de la conversión.
+	const [conversionResult, setConversionResult] = useState<string>(
+		`Bs.S ${selectedRate}`,
+	)
+
+	// Cambia la tasa seleccionada y recalcula la conversión sin borrar los inputs
+	const handleSelectRate = (rate: number) => {
+		setSelectedRate(rate)
+
+		if (usdValue.trim() !== '') {
+			const num = parseFormattedCurrency(usdValue, '.', ',')
+			if (!isNaN(num)) {
+				const result = num * rate
+				const formatted = new Intl.NumberFormat('es-VE', {
+					style: 'currency',
+					currency: 'VES',
+				}).format(result)
+				setConversionResult(formatted)
+			}
+		} else if (vesValue.trim() !== '') {
+			const num = parseFormattedCurrency(vesValue, ',', '.')
+			if (!isNaN(num) && rate !== 0) {
+				const result = num / rate
+				const formatted = new Intl.NumberFormat('en-US', {
+					style: 'currency',
+					currency: 'USD',
+				}).format(result)
+				setConversionResult(formatted)
+			}
+		} else {
+			setConversionResult(`Bs.S ${rate}`)
+		}
+	}
+
+	// --------------------
+	// 1. Input de USD
+	// --------------------
+	const handleUsdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawValue = e.target.value
+		// Formateamos para que "." sea decimal y "," miles
+		const formattedValue = formatCurrencyInput(rawValue, '.', ',')
+		setUsdValue(formattedValue)
+		setVesValue('')
+
+		if (rawValue.trim() === '') {
+			setConversionResult(`Bs.S ${selectedRate}`)
+			return
+		}
+
+		const num = parseFormattedCurrency(formattedValue, '.', ',')
+		if (!isNaN(num) && !isNaN(selectedRate)) {
+			const result = num * selectedRate
+			const formatted = new Intl.NumberFormat('es-VE', {
+				style: 'currency',
+				currency: 'VES',
+			}).format(result)
+			setConversionResult(formatted)
+		} else {
+			setConversionResult(`Bs.S ${selectedRate}`)
+		}
+	}
+
+	// --------------------
+	// 2. Input de VES
+	// --------------------
+	const handleVesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawValue = e.target.value
+		// Formateamos para que "," sea decimal y "." miles
+		const formattedValue = formatCurrencyInput(rawValue, ',', '.')
+		setVesValue(formattedValue)
+		setUsdValue('')
+
+		if (rawValue.trim() === '') {
+			setConversionResult(`Bs.S ${selectedRate}`)
+			return
+		}
+
+		const num = parseFormattedCurrency(formattedValue, ',', '.')
+		if (!isNaN(num) && !isNaN(selectedRate) && selectedRate !== 0) {
+			const result = num / selectedRate
+			const formatted = new Intl.NumberFormat('en-US', {
+				style: 'currency',
+				currency: 'USD',
+			}).format(result)
+			setConversionResult(formatted)
+		} else {
+			setConversionResult(`Bs.S ${selectedRate}`)
+		}
+	}
+
+	// ---------------------------------------------------------
+	// Helpers para formatear y parsear valores de entrada
+	// ---------------------------------------------------------
+
+	function formatCurrencyInput(
+		inputValue: string,
+		decimal: string,
+		thousands: string,
+	): string {
+		// Eliminar todo lo que no sean dígitos
+		const cleanedValue = inputValue.replace(/[^0-9]/g, '')
+		if (cleanedValue === '') {
+			return '0' + decimal + '00'
+		}
+
+		// Se asume que los dos últimos dígitos son los centavos
+		const amount = cleanedValue.length > 2 ? cleanedValue.slice(0, -2) : '0'
+		const cents =
+			cleanedValue.length > 2
+				? cleanedValue.slice(-2)
+				: cleanedValue.padStart(2, '0')
+
+		const integerPart = removeLeadingZeros(amount)
+		const formattedAmount = addThousandSeparators(integerPart, thousands)
+
+		return `${formattedAmount}${decimal}${cents}`
+	}
+
+	function removeLeadingZeros(cadena: string): string {
+		return String(parseInt(cadena, 10))
+	}
+
+	function addThousandSeparators(numberStr: string, thousands: string): string {
+		return numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, thousands)
+	}
+
+	function parseFormattedCurrency(
+		formatted: string,
+		decimal: string,
+		thousands: string,
+	): number {
+		let normalized = formatted.replace(new RegExp(`\\${thousands}`, 'g'), '')
+		if (decimal !== '.') {
+			normalized = normalized.replace(decimal, '.')
+		}
+		return parseFloat(normalized)
+	}
+
 	return (
 		<Container>
 			<div className='flex flex-col gap-1 z-[1]'>
 				<h3 className='text-2xl font-bold'>Calculadora</h3>
-
 				<h1 className='md:text-base text-sm opacity-70'>
 					Convierte USD a VES al BCV o Paralelo a la tasa del día.
 				</h1>
@@ -24,22 +196,29 @@ export function Calculator() {
 
 			<section className='flex justify-center mt-2'>
 				<ul className='grid grid-cols-2 rounded-lg gap-x-2'>
-					<PillMount id='BCV' value={tasaCentral} name='BCV' title='BCV' />
-
+					<PillMount
+						id='BCV'
+						value={tasaCentral}
+						name='BCV'
+						title='BCV'
+						onClick={() => handleSelectRate(tasaCentral)}
+					/>
 					<PillMount
 						id='Paralelo'
 						value={tasaEnparalelo}
 						name='Paralelo'
 						title='Paralelo'
+						onClick={() => handleSelectRate(tasaEnparalelo)}
 					/>
 				</ul>
 			</section>
+
 			<article className='text-center text-accent md:my-2 my-3 items-center flex flex-col'>
 				<p
 					className='text-5xl md:text-6xl font-semibold text-primario'
 					id='mount'
 				>
-					Bs.S <strong>{tasaCentral}</strong>
+					{conversionResult}
 				</p>
 				<p className='text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs'>
 					Última actualización <br />
@@ -47,61 +226,31 @@ export function Calculator() {
 						{setCurrencyDollar.monitors.bcv.last_update}
 					</strong>
 				</p>
-				<CopyButton id='btn-copy-convert' />
+				<CopyButton id='mount' />
 			</article>
 
 			<form className='dark:bg-tertiary bg-secondary-white border-t dark:border-t-secondary border-t-primary-white grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center'>
-				<div className='flex flex-col mb-2 md:mb-0'>
-					<label
-						htmlFor='dolares'
-						className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold text-secondary dark:text-white'
-					>
-						<UnitedStatesIcon />
-						Dólares
-					</label>
-					<div className='relative'>
-						<label
-							htmlFor='dolares'
-							className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4'
-						>
-							$
-						</label>
-						<input
-							className='text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-10 dark:bg-raisin-black'
-							id='dolares'
-							type='text'
-							placeholder='1.00'
-							autoComplete='off'
-							spellCheck='false'
-						/>
-					</div>
-				</div>
-				<div className='flex flex-col mb-2 md:mb-0'>
-					<label
-						htmlFor='bolivares'
-						className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white'
-					>
-						<VenezuelaIcon />
-						Bolívares
-					</label>
-					<div className='relative'>
-						<label
-							htmlFor='bolivares'
-							className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4'
-						>
-							Bs.S
-						</label>
-						<input
-							className='text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-20 dark:bg-raisin-black'
-							id='bolivares'
-							name='value'
-							type='text'
-							placeholder={setCurrencyDollar.monitors.bcv.price}
-							autoComplete='off'
-							spellCheck='false'
-						/>
-					</div>
-				</div>
+				<InputContainer
+					className='pl-10'
+					for_currency={'dolares'}
+					icon={<UnitedStatesIcon />}
+					label_currency={'$'}
+					placeholder_input={'1.00'}
+					value={usdValue}
+					label_title='Dolares'
+					handleChange={handleUsdChange}
+				/>
+
+				<InputContainer
+					className='pl-20'
+					for_currency='bolivares'
+					icon={<VenezuelaIcon />}
+					label_currency='Bs.S'
+					placeholder_input={String(setCurrencyDollar.monitors.bcv.price)}
+					value={vesValue}
+					label_title='Bolívares'
+					handleChange={handleVesChange}
+				/>
 			</form>
 
 			<p className='text-neutral-400 text-sm text-center'>
