@@ -8,20 +8,19 @@ import { getCurrency } from '@/lib/index'
 export const revalidate = 600
 
 export default async function Home() {
-  // Estas llamadas se ejecutan en el servidor
-  const setCurrencyDollar = await getCurrency('euro')
-  // Renderizamos el contenido
-  return (
-    <>
-      <Header>
-        <HeaderToggle
-          value={setCurrencyDollar.monitors.bcv.price}
-          sign={'€'}
-          value_datetime={setCurrencyDollar.monitors.bcv.last_update}
-        />
-      </Header>
-      <Calculator
-        setCurrencyDollar={setCurrencyDollar} />
-    </>
-  )
+	// Estas llamadas se ejecutan en el servidor
+	const setCurrencyDollar = await getCurrency('euro')
+	// Renderizamos el contenido
+	return (
+		<>
+			<Header>
+				<HeaderToggle
+					value={setCurrencyDollar.monitors.bcv.price}
+					sign={'€'}
+					value_datetime={setCurrencyDollar.monitors.bcv.last_update}
+				/>
+			</Header>
+			<Calculator setCurrencyDollar={setCurrencyDollar} />
+		</>
+	)
 }

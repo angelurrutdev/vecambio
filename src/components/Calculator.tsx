@@ -1,5 +1,5 @@
 'use client'
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { PillMount } from './PillMount'
 import { Container } from './SectionContainer'
@@ -9,21 +9,23 @@ import Link from 'next/link'
 import { InputContainer } from './InputContainer'
 
 type CalculatorProps = {
-    setCurrencyDollar: {
-        monitors: {
-			enparalelovzla: any
-            bcv: {
-                last_update: string
-                price: number
-            }
-        }
-    }
+	setCurrencyDollar: {
+		monitors: {
+			enparalelovzla: {
+				price: number
+			}
+			bcv: {
+				last_update: string
+				price: number
+			}
+		}
+	}
 }
-export default function Calculator({
-	setCurrencyDollar,
-}: CalculatorProps) {
+export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 	// Estados
-	const [selectedRate, setSelectedRate] = useState<number>(setCurrencyDollar.monitors.bcv.price)
+	const [selectedRate, setSelectedRate] = useState<number>(
+		setCurrencyDollar.monitors.bcv.price,
+	)
 	const [usdValue, setUsdValue] = useState<string>('')
 	const [vesValue, setVesValue] = useState<string>('')
 
@@ -165,17 +167,17 @@ export default function Calculator({
 		return parseFloat(normalized)
 	}
 
-	// Verifica la URL Si es /euros 
-	const pathname = usePathname();
-    let usdLabelTitle = 'Dolares';
-    let usdIcon = <UnitedStatesIcon />;
-    let usdLabelCurrency = '$';
+	// Verifica la URL Si es /euros
+	const pathname = usePathname()
+	let usdLabelTitle = 'Dolares'
+	let usdIcon = <UnitedStatesIcon />
+	let usdLabelCurrency = '$'
 
-    if (pathname === '/euros') {
-        usdLabelTitle = 'Euros';
-        usdIcon = <SpainIcon />;
-        usdLabelCurrency = '€';
-    }
+	if (pathname === '/euros') {
+		usdLabelTitle = 'Euros'
+		usdIcon = <SpainIcon />
+		usdLabelCurrency = '€'
+	}
 
 	return (
 		<Container>
@@ -193,14 +195,18 @@ export default function Calculator({
 						value={setCurrencyDollar.monitors.bcv.price}
 						name='BCV'
 						title='BCV'
-						onClick={() => handleSelectRate(setCurrencyDollar.monitors.bcv.price)}
+						onClick={() =>
+							handleSelectRate(setCurrencyDollar.monitors.bcv.price)
+						}
 					/>
 					<PillMount
 						id='Paralelo'
 						value={setCurrencyDollar.monitors.enparalelovzla.price}
 						name='Paralelo'
 						title='Paralelo'
-						onClick={() => handleSelectRate(setCurrencyDollar.monitors.enparalelovzla.price)}
+						onClick={() =>
+							handleSelectRate(setCurrencyDollar.monitors.enparalelovzla.price)
+						}
 					/>
 				</ul>
 			</section>
