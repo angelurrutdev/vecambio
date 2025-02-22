@@ -30,12 +30,12 @@ export function PillMount({ id, value, name, title, onClick }: PillMountProps) {
 			<label
 				htmlFor={id}
 				onClick={onClick}
-				className='
+				className='px-2 
           text-neutral-900 hover:text-neutral-700 dark:text-neutral-50 
           dark:hover:text-neutral-300 dark:peer-checked:text-neutral-400 
           cursor-pointer transition px-2 flex flex-col justify-center 
           items-center text-sm w-full px-2 py-1 ring-2 ring-transparent 
-          rounded-lg peer-checked:bg-accent/80 peer-checked:text-neutral-600'
+          rounded-lg'
 			>
 				<div>{title}</div>
 				<div className='font-semibold flex' id={`price-tasa-${id}`}>
