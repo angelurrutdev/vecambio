@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 
 // Fonts:
 import localFont from 'next/font/local'
+import Footer from '@/components/Footer'
 
 const interVariable = localFont({
 	variable: '--font-sans',
@@ -92,7 +93,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang='en'>
+		<html lang='es'>
 			<body
 				className={`font-sans ${interVariable.variable} ${geistMonoVariable.variable} antialiased bg-white dark:bg-neutral-900 selection:bg-neutral-200 dark:selection:bg-neutral-700`}
 			>
@@ -103,6 +104,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					{children}
+					<Footer />
 				</ThemeProvider>
 			</body>
 		</html>
