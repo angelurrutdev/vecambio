@@ -39,7 +39,7 @@ export function InputContainer({
 				</label>
 
 				<input
-					className={`text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto dark:bg-raisin-black ${className}`}
+					className={`text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none w-full h-auto dark:bg-raisin-black ${className}`}
 					id={for_currency}
 					name='value'
 					type='text'
