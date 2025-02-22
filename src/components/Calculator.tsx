@@ -1,49 +1,29 @@
 'use client'
+import { usePathname } from 'next/navigation';
 import { useState } from 'react'
 import { PillMount } from './PillMount'
 import { Container } from './SectionContainer'
 import { CopyButton } from './CopyButton'
-import { UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
+import { SpainIcon, UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
 import { InputContainer } from './InputContainer'
 
-/* Definición de las props que recibirá el componente. 
-   Puedes ajustar los tipos según la estructura exacta de los datos */
 type CalculatorProps = {
-	setCurrencyDollar: {
-		monitors: {
-			bcv: {
-				last_update: string
-				price: string
-			}
-		}
-	}
-	rawTasaEnparalelo: string
-	rawTasaCentral: string
+    setCurrencyDollar: {
+        monitors: {
+			enparalelovzla: any
+            bcv: {
+                last_update: string
+                price: number
+            }
+        }
+    }
 }
-
-// Función para parsear la tasa (BCV/Paralelo)
-function parseRate(val: string): number {
-	if (typeof val === 'number') return val
-	if (typeof val === 'string') {
-		const replaced = val.replace(',', '.')
-		const parsed = parseFloat(replaced)
-		return isNaN(parsed) ? 0 : parsed
-	}
-	return 0
-}
-
 export default function Calculator({
 	setCurrencyDollar,
-	rawTasaEnparalelo,
-	rawTasaCentral,
 }: CalculatorProps) {
-	// Convertimos las tasas a number
-	const tasaEnparalelo = parseRate(rawTasaEnparalelo)
-	const tasaCentral = parseRate(rawTasaCentral)
-
 	// Estados
-	const [selectedRate, setSelectedRate] = useState<number>(tasaCentral)
+	const [selectedRate, setSelectedRate] = useState<number>(setCurrencyDollar.monitors.bcv.price)
 	const [usdValue, setUsdValue] = useState<string>('')
 	const [vesValue, setVesValue] = useState<string>('')
 
@@ -185,6 +165,18 @@ export default function Calculator({
 		return parseFloat(normalized)
 	}
 
+	// Verifica la URL Si es /euros 
+	const pathname = usePathname();
+    let usdLabelTitle = 'Dolares';
+    let usdIcon = <UnitedStatesIcon />;
+    let usdLabelCurrency = '$';
+
+    if (pathname === '/euros') {
+        usdLabelTitle = 'Euros';
+        usdIcon = <SpainIcon />;
+        usdLabelCurrency = '€';
+    }
+
 	return (
 		<Container>
 			<div className='flex flex-col gap-1 z-[1]'>
@@ -198,17 +190,17 @@ export default function Calculator({
 				<ul className='grid grid-cols-2 rounded-lg gap-x-2'>
 					<PillMount
 						id='BCV'
-						value={tasaCentral}
+						value={setCurrencyDollar.monitors.bcv.price}
 						name='BCV'
 						title='BCV'
-						onClick={() => handleSelectRate(tasaCentral)}
+						onClick={() => handleSelectRate(setCurrencyDollar.monitors.bcv.price)}
 					/>
 					<PillMount
 						id='Paralelo'
-						value={tasaEnparalelo}
+						value={setCurrencyDollar.monitors.enparalelovzla.price}
 						name='Paralelo'
 						title='Paralelo'
-						onClick={() => handleSelectRate(tasaEnparalelo)}
+						onClick={() => handleSelectRate(setCurrencyDollar.monitors.enparalelovzla.price)}
 					/>
 				</ul>
 			</section>
@@ -229,15 +221,15 @@ export default function Calculator({
 				<CopyButton id='mount' />
 			</article>
 
-			<form className='dark:bg-tertiary bg-secondary-white border-t dark:border-t-secondary border-t-primary-white grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center'>
+			<form className=' grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center'>
 				<InputContainer
 					className='pl-10'
 					for_currency={'dolares'}
-					icon={<UnitedStatesIcon />}
-					label_currency={'$'}
+					icon={usdIcon}
+					label_currency={usdLabelCurrency}
 					placeholder_input={'1.00'}
 					value={usdValue}
-					label_title='Dolares'
+					label_title={usdLabelTitle}
 					handleChange={handleUsdChange}
 				/>
 
