@@ -1,6 +1,6 @@
 export default function Footer() {
 	return (
-		<footer className='group w-full text-sm text-neutral-600 dark:text-neutral-400 bg-white/60 backdrop-blur-md dark:bg-neutral-900/60 bottom-0 mt-4'>
+		<footer className='group w-full my-3 text-sm text-neutral-600 dark:text-neutral-400 bg-white/60 backdrop-blur-md dark:bg-neutral-900/60 bottom-0 mt-4'>
 			<div className='mx-4 flex items-center justify-between'>
 				<div className='flex items-center space-x-2'>
 					<svg
@@ -21,6 +21,27 @@ export default function Footer() {
 					<p>Made by Angel</p>
 				</div>
 				<div className='flex items-center'>
+					<a
+						href='/faq'
+						className='mr-2 flex hover:underline text-neutral-600 transition-colors duration-100 hover:text-black dark:text-neutral-400 dark:decoration-neutral-700 dark:hover:text-white'
+					>
+						FAQ
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='24'
+							height='12'
+							viewBox='0 0 24 24'
+							fill='none'
+							stroke='currentColor'
+							strokeWidth='1.4'
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							className='lucide lucide-arrow-up-right'
+						>
+							<path d='M7 7h10v10'></path>
+							<path d='M7 17 17 7'></path>
+						</svg>
+					</a>
 					<a
 						href='https://github.com/angelurrutdev/vecambio/issues/new'
 						target='_blank'

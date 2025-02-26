@@ -1,5 +1,4 @@
 import React from 'react'
-import { ModeToggle } from './ThemeToggle'
 
 interface Props {
 	value: number // Changed to number
@@ -29,7 +28,6 @@ const HeaderToggle = ({ value, value_datetime, sign }: Props) => {
 						{value_datetime || 'No date available'}
 					</span>
 				</div>
-				<ModeToggle />
 			</div>
 		</div>
 	)
