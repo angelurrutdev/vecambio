@@ -7,6 +7,7 @@ import { CopyButton } from './CopyButton'
 import { SpainIcon, UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
 import { InputContainer } from './InputContainer'
+import PreConverts from './PreConverts'
 
 type CalculatorProps = {
 	setCurrencyDollar: {
@@ -264,6 +265,80 @@ export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 				para nuestra calculadora. Esta información es solo para fines
 				informativos.
 			</p>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={1}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={50}
+			/>
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={10}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={1000}
+			/>
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={20}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={2000}
+			/>
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={30}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={3000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={40}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={4000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={50}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={5000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={60}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={6000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={70}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={7000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={80}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={8000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={90}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={9000}
+			/>
+
+			<PreConverts
+				mountConvert={setCurrencyDollar.monitors.bcv.price}
+				mount={100}
+				BolivarMount={setCurrencyDollar.monitors.bcv.price}
+				Bolivar={10000}
+			/>
 		</Container>
 	)
 }

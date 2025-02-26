@@ -22,6 +22,27 @@ const Logo = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 )
 
+const Arrows = (props: SVGProps<SVGSVGElement>) => (
+	<svg
+		width='24'
+		height='24'
+		{...props}
+		className='mx-auto'
+		viewBox='0 0 24 24'
+		fill='none'
+		stroke='currentColor'
+		strokeWidth='1'
+		strokeLinecap='round'
+		strokeLinejoin='round'
+	>
+		{' '}
+		<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>{' '}
+		<path d='M11 16h10'></path> <path d='M11 16l4 4'></path>{' '}
+		<path d='M11 16l4 -4'></path> <path d='M13 8h-10'></path>{' '}
+		<path d='M13 8l-4 4'></path> <path d='M13 8l-4 -4'></path>{' '}
+	</svg>
+)
+
 const EuroIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		{...props}
@@ -6797,4 +6818,5 @@ export {
 	UnitedStatesIcon,
 	SpainIcon,
 	VenezuelaIcon,
+	Arrows,
 }
