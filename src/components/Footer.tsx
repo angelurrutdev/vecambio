@@ -22,27 +22,6 @@ export default function Footer() {
 				</div>
 				<div className='flex items-center'>
 					<a
-						href='/faq'
-						className='mr-2 flex hover:underline text-neutral-600 transition-colors duration-100 hover:text-black dark:text-neutral-400 dark:decoration-neutral-700 dark:hover:text-white'
-					>
-						FAQ
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='24'
-							height='12'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							strokeWidth='1.4'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							className='lucide lucide-arrow-up-right'
-						>
-							<path d='M7 7h10v10'></path>
-							<path d='M7 17 17 7'></path>
-						</svg>
-					</a>
-					<a
 						href='https://github.com/angelurrutdev/vecambio/issues/new'
 						target='_blank'
 						rel='noreferrer'
