@@ -1,4 +1,3 @@
-// app/page.tsx
 import Header from '@/components/Header'
 import HeaderToggle from '@/components/HeaderToggle'
 import Calculator from '@/components/Calculator'

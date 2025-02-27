@@ -8,6 +8,7 @@ import { SpainIcon, UnitedStatesIcon, VenezuelaIcon } from '@/icons/icons'
 import Link from 'next/link'
 import { InputContainer } from './InputContainer'
 import PreConverts from './PreConverts'
+import PreTitles from './PreTitles'
 
 type CalculatorProps = {
 	setCurrencyDollar: {
@@ -183,10 +184,10 @@ export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 	return (
 		<Container>
 			<div className='flex flex-col gap-1 z-[1]'>
-				<h3 className='text-2xl font-bold'>Calculadora</h3>
-				<h1 className='md:text-base text-sm opacity-70'>
-					Convierte USD a VES al BCV o Paralelo a la tasa del día.
-				</h1>
+				<PreTitles
+					title='Calculadora'
+					pretitle='Convierte USD a VES al BCV o Paralelo a la tasa del día.'
+				/>
 			</div>
 
 			<section className='flex justify-center mt-2'>

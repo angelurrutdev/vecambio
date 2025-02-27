@@ -12,3 +12,4 @@ export const getMonitorDollar = async (monitor: string) => {
 	const res = await fetch(url)
 	return await res.json()
 }
+// https://pydolarve.org/api/v1/dollar?page=criptodolar
