@@ -18,10 +18,10 @@ export default function Tasas() {
 			</Header>
 			<Container>
 				<PreTitles
-					title='Tasas de Cambio Promedio al Día'
+					title='Tasas de Cambio'
 					pretitle='Consulta las tasas del dolar BCV y Paralelo del dia de hoy'
 				/>
-				<article className='text-center p-4 border-b dark:border-secondary dark:bg-tertiary bg-white'>
+				<article className='rounded-lg text-center p-4 '>
 					<h1 className='text-4xl font-medium text-gray-500 dark:text-white'>
 						Tasa promedio
 					</h1>
@@ -29,9 +29,9 @@ export default function Tasas() {
 						<div className='mb-4 text-xl font-normal text-gray-500 dark:text-gray-400'>
 							{setCurrencyDollar.datetime.date}
 						</div>
-						<div>
-							<span className='text-5xl text-accent font-semibold'>$</span>
-							<span className='text-7xl text-accent font-extrabold tracking-tight'>
+						<div className='text-primario'>
+							<span className='text-5xl font-semibold'>$</span>
+							<span className='text-7xl  font-extrabold tracking-tight'>
 								{setCurrencyDollar.monitors.promedio.price}
 							</span>
 						</div>
@@ -52,14 +52,15 @@ export default function Tasas() {
 								/>
 							</div>
 							<div className='flex-1 min-w-0 ms-4'>
-								<p className='text-xl font-medium text-gray-900 truncate dark:text-white'>
+								<p className='md:text-md sm:text-md lg:text-xl font-medium text-gray-900 text-pretty dark:text-white'>
 									Dólar Monitor
 								</p>
-								<p className='text-lg text-gray-500 truncate dark:text-gray-400'>
-									jueves, 27 de febrero de 2025
+								<p className='text-lg text-gray-500  dark:text-gray-400 '>
+									{setCurrencyDollar.monitors.promedio.last_update}
 								</p>
 							</div>
-							<div className='inline-flex items-center text-3xl font-semibold text-accent'>
+
+							<div className='inline-flex items-center text-3xl font-semibold text-primario'>
 								<span>$</span> <span>80.24</span>
 							</div>
 						</div>
