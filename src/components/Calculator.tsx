@@ -20,6 +20,9 @@ type CalculatorProps = {
 				last_update: string
 				price: number
 			}
+			promedio: {
+				price: number
+			}
 		}
 	}
 }
@@ -191,7 +194,7 @@ export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 			</div>
 
 			<section className='flex justify-center mt-2'>
-				<ul className='grid grid-cols-2 rounded-lg gap-x-2'>
+				<ul className='grid grid-cols-3 rounded-lg gap-x-2'>
 					<PillMount
 						id='BCV'
 						value={setCurrencyDollar.monitors.bcv.price}
@@ -201,6 +204,17 @@ export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 							handleSelectRate(setCurrencyDollar.monitors.bcv.price)
 						}
 					/>
+
+					<PillMount
+						id='Promedio'
+						value={setCurrencyDollar.monitors.promedio.price}
+						name='Promedio'
+						title='Promedio'
+						onClick={() =>
+							handleSelectRate(setCurrencyDollar.monitors.promedio.price)
+						}
+					/>
+
 					<PillMount
 						id='Paralelo'
 						value={setCurrencyDollar.monitors.enparalelovzla.price}
