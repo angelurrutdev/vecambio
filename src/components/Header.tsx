@@ -5,7 +5,7 @@ import { Logo, EuroIcon, DollarIcon, CashIcon } from '../icons/icons'
 interface NavItem {
 	href: string
 	label: string
-	labelMobile?: string
+
 	className?: string
 	icon?: React.ComponentType
 }
@@ -15,19 +15,19 @@ export default function Header() {
 		{
 			href: '/',
 			label: 'Convertir Dolares',
-			labelMobile: 'Dolares',
+
 			icon: DollarIcon,
 		},
 		{
 			href: '/euros',
 			label: 'Convertir Euros',
-			labelMobile: 'Euros',
+
 			icon: EuroIcon,
 		},
 		{
 			href: '/tasas',
 			label: 'Otras Tasas',
-			labelMobile: 'Tasas',
+
 			icon: CashIcon,
 		},
 	]
@@ -63,9 +63,6 @@ export default function Header() {
 										>
 											{item.icon && <item.icon />}
 											<p className='md:block hidden'>{item.label}</p>
-											<p className='md:hidden block '>
-												{item.labelMobile || item.label}
-											</p>{' '}
 										</a>
 									</li>
 								))}
@@ -74,7 +71,7 @@ export default function Header() {
 					</nav>
 				</div>
 			</div>
-			<div className='px-3 md:block hidden '>
+			<div className=''>
 				<ModeToggle />
 			</div>
 		</nav>
