@@ -1,5 +1,3 @@
-// app/page.tsx
-import Header from '@/components/Header'
 import Calculator from '@/components/Calculator'
 import { getCurrency } from '@/lib/index'
 
@@ -12,7 +10,6 @@ export default async function Home() {
 	// Renderizamos el contenido
 	return (
 		<>
-			<Header />
 			<Calculator setCurrencyDollar={setCurrencyDollar} />
 		</>
 	)

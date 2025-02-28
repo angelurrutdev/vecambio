@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 // Fonts:
 import localFont from 'next/font/local'
 import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 
 const interVariable = localFont({
 	variable: '--font-sans',
@@ -103,6 +104,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Header />
 					{children}
 					<Footer />
 				</ThemeProvider>

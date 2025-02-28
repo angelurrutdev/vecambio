@@ -1,4 +1,3 @@
-import Header from '@/components/Header'
 import PreTitles from '@/components/PreTitles'
 import { Container } from '@/components/SectionContainer'
 import { getMonitorDollar } from '@/lib/index'
@@ -8,8 +7,6 @@ const setCurrencyDollar = await getMonitorDollar('criptodolar')
 export default function Tasas() {
 	return (
 		<>
-			<Header />
-
 			<Container>
 				<PreTitles
 					title='Tasas de Cambio'

@@ -1,10 +1,8 @@
-import Header from '@/components/Header'
 import { Container } from '@/components/SectionContainer'
 
 export default function Tasas() {
 	return (
 		<>
-			<Header />
 			<Container>
 				<article>
 					<ul className='mt-4'>
