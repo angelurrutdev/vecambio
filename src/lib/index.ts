@@ -1,5 +1,5 @@
 export const getCurrency = async (currency: string) => {
-	const url = `https://pydolarve.org/api/v1/${currency}?format_date=default`
+	const url = `https://pydolarve.org/api/v1/${currency}?page=criptodolar`
 	const res = await fetch(url)
 	if (!res.ok) {
 		throw new Error(`Error fetching data for ${currency}`)
@@ -12,4 +12,4 @@ export const getMonitorDollar = async (monitor: string) => {
 	const res = await fetch(url)
 	return await res.json()
 }
-// https://pydolarve.org/api/v1/dollar?page=criptodolar
+// https://pydolarve.org/api/v1/dollar?page=criptodolar?format_date=default
