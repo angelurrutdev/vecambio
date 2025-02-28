@@ -13,13 +13,7 @@ export default async function Home() {
 	// Renderizamos el contenido
 	return (
 		<>
-			<Header>
-				<HeaderToggle
-					value={setCurrencyDollar.monitors.bcv.price}
-					sign={'€'}
-					value_datetime={setCurrencyDollar.monitors.bcv.last_update}
-				/>
-			</Header>
+			<Header />
 			<Calculator setCurrencyDollar={setCurrencyDollar} />
 		</>
 	)
