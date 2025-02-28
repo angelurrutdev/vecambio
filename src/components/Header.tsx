@@ -5,6 +5,7 @@ import { Logo, EuroIcon, DollarIcon, CashIcon } from '../icons/icons'
 interface NavItem {
 	href: string
 	label: string
+	labelMobile?: string
 	className?: string
 	icon?: React.ComponentType
 }
@@ -14,19 +15,26 @@ export default function Header() {
 		{
 			href: '/',
 			label: 'Convertir Dolares',
+			labelMobile: 'Dolares',
 			icon: DollarIcon,
 		},
 		{
 			href: '/euros',
 			label: 'Convertir Euros',
+			labelMobile: 'Euros',
 			icon: EuroIcon,
 		},
-		{ href: '/tasas', label: 'Otras Tasas', icon: CashIcon },
+		{
+			href: '/tasas',
+			label: 'Otras Tasas',
+			labelMobile: 'Tasas',
+			icon: CashIcon,
+		},
 	]
 
 	return (
 		<nav className='sticky top-3 z-10 flex items-center justify-between gap-8 rounded-full border px-3 py-1.5 backdrop-blur-lg md:top-2 mx-auto w-full max-w-3xl md:px-0 dark:border-secondary'>
-			<div className='flex items-center gap-6'>
+			<div className='flex items-center gap-2'>
 				<div className='ml-3 flex items-center gap-3'>
 					<span>
 						<a
@@ -43,17 +51,21 @@ export default function Header() {
 						<div className='relative'>
 							<ul className='group flex flex-1 list-none items-center justify-center space-x-1'>
 								{items.map(item => (
-									<li>
+									<li key={item.href}>
+										{' '}
 										<a
 											className={`group w-max px-2 py-2  focus:text-neutral-800 focus:outline-none h-9  gap-1 text-neutral-500 ring-transparent ring-2 
-											
-											dark:text-white inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 hover:text-neutral-900  dark:hover:text-neutral-50 group
-											hover:scale-105
-												${item.className}`}
+                                            
+                                            dark:text-white inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 hover:text-neutral-900  dark:hover:text-neutral-50 group
+                                            hover:scale-105
+                                                ${item.className}`}
 											href={item.href}
 										>
 											{item.icon && <item.icon />}
-											{item.label}
+											<p className='md:block hidden'>{item.label}</p>
+											<p className='md:hidden block '>
+												{item.labelMobile || item.label}
+											</p>{' '}
 										</a>
 									</li>
 								))}
@@ -62,7 +74,7 @@ export default function Header() {
 					</nav>
 				</div>
 			</div>
-			<div className='px-3'>
+			<div className='px-3 md:block hidden '>
 				<ModeToggle />
 			</div>
 		</nav>

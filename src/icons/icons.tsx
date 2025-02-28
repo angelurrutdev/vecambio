@@ -46,6 +46,7 @@ const Arrows = (props: SVGProps<SVGSVGElement>) => (
 const EuroIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		{...props}
+		className='block'
 		xmlns='http://www.w3.org/2000/svg'
 		width='24'
 		height='24'
@@ -65,6 +66,7 @@ const EuroIcon = (props: SVGProps<SVGSVGElement>) => (
 const DollarIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		{...props}
+		className='block'
 		xmlns='http://www.w3.org/2000/svg'
 		width='24'
 		height='24'
@@ -84,6 +86,7 @@ const DollarIcon = (props: SVGProps<SVGSVGElement>) => (
 const CashIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		{...props}
+		className='block'
 		xmlns='http://www.w3.org/2000/svg'
 		width='24'
 		height='24'
