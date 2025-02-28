@@ -82,7 +82,7 @@ export default function PreConverts({
 				<Arrows />
 				<div className='dark:bg-tertiary bg-secondary-white p-3 -mt-3'>
 					<p className='text-base text-right flex items-center justify-end'>
-						a Bolívares son{' '}
+						a Bolívares
 						<strong className='mx-2'>
 							Bs.S&nbsp;{formatNumber(convertedAmount)}
 						</strong>
@@ -102,7 +102,7 @@ export default function PreConverts({
 				<Arrows />
 				<div className='dark:bg-tertiary bg-secondary-white p-3 -mt-3'>
 					<p className='text-base text-right flex items-center justify-end'>
-						a {currencyInfo.CurrencyTitle} son{' '}
+						a {currencyInfo.CurrencyTitle}
 						<strong className='mx-2'>
 							{currencyInfo.Currency} {formatNumber(divisionResult)}
 						</strong>
