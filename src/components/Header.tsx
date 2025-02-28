@@ -17,15 +17,15 @@ export default function Header() {
 			icon: DollarIcon,
 		},
 		{
-			href: '/tasas-de-cambio-promedio-hoy',
+			href: '/euros',
 			label: 'Convertir Euros',
 			icon: EuroIcon,
 		},
-		{ href: '/bancos', label: 'Otras Tasas', icon: CashIcon },
+		{ href: '/tasas', label: 'Otras Tasas', icon: CashIcon },
 	]
 
 	return (
-		<nav className='sticky top-3 z-10 flex items-center justify-between gap-8 rounded-full border px-3 py-1.5 backdrop-blur-lg bg-secondary-white/25 dark:bg-primary/25 md:top-2 mx-auto w-full max-w-3xl md:px-0 dark:border-secondary'>
+		<nav className='sticky top-3 z-10 flex items-center justify-between gap-8 rounded-full border px-3 py-1.5 backdrop-blur-lg md:top-2 mx-auto w-full max-w-3xl md:px-0 dark:border-secondary'>
 			<div className='flex items-center gap-6'>
 				<div className='ml-3 flex items-center gap-3'>
 					<span>
@@ -45,7 +45,11 @@ export default function Header() {
 								{items.map(item => (
 									<li>
 										<a
-											className={`group inline-flex w-max items-center justify-center px-2 py-2 text-sm font-medium transition-colors hover:text-neutral-800 focus:bg-accent focus:text-neutral-800 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 h-9 rounded-full bg-transparent hover:bg-accent/50 gap-1 text-neutral-500 ring-transparent ring-2 dark:text-white ${item.className}`}
+											className={`group w-max px-2 py-2  focus:text-neutral-800 focus:outline-none h-9  gap-1 text-neutral-500 ring-transparent ring-2 
+											
+											dark:text-white inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 hover:text-neutral-900  dark:hover:text-neutral-50 group
+											hover:scale-105
+												${item.className}`}
 											href={item.href}
 										>
 											{item.icon && <item.icon />}
