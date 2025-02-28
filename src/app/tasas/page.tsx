@@ -1,5 +1,4 @@
 import Header from '@/components/Header'
-import HeaderToggle from '@/components/HeaderToggle'
 import PreTitles from '@/components/PreTitles'
 import { Container } from '@/components/SectionContainer'
 import { getMonitorDollar } from '@/lib/index'
@@ -9,13 +8,8 @@ const setCurrencyDollar = await getMonitorDollar('criptodolar')
 export default function Tasas() {
 	return (
 		<>
-			<Header>
-				<HeaderToggle
-					value={setCurrencyDollar.monitors.bcv.price}
-					sign={'$'}
-					value_datetime={setCurrencyDollar.monitors.bcv.last_update}
-				/>
-			</Header>
+			<Header />
+
 			<Container>
 				<PreTitles
 					title='Tasas de Cambio'

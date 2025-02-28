@@ -1,5 +1,4 @@
 import Header from '@/components/Header'
-import HeaderToggle from '@/components/HeaderToggle'
 import Calculator from '@/components/Calculator'
 import { getCurrency } from '@/lib/index'
 
@@ -13,13 +12,7 @@ export default async function Home() {
 	// Renderizamos el contenido
 	return (
 		<>
-			<Header>
-				<HeaderToggle
-					value={setCurrencyDollar.monitors.bcv.price}
-					sign={'$'}
-					value_datetime={setCurrencyDollar.monitors.bcv.last_update}
-				/>
-			</Header>
+			<Header />
 			<Calculator setCurrencyDollar={setCurrencyDollar} />
 		</>
 	)
