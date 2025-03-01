@@ -22,24 +22,24 @@ export function InputContainer({
 	className,
 }: InputContainerProps) {
 	return (
-		<div className='flex flex-col mb-2 md:mb-0'>
+		<div className='flex flex-col mb-2 md:mb-0 '>
 			<label
 				htmlFor={for_currency}
-				className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white'
+				className='flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white '
 			>
 				{icon}
 				{label_title}
 			</label>
-			<div className='relative'>
+			<div className='relative '>
 				<label
 					htmlFor={for_currency}
-					className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4 '
+					className='text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4  '
 				>
 					{label_currency}
 				</label>
 
 				<input
-					className={`text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none w-full h-auto dark:bg-raisin-black ${className}`}
+					className={`text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-200 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none w-full h-auto dark:bg-cuber-black  ${className}`}
 					id={for_currency}
 					name='value'
 					type='text'
