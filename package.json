@@ -1,6 +1,9 @@
 {
-  "name": "vecambio-next",
-  "version": "0.1.0",
+  "name": "@angelurrutdev/vecambio",
+  "version": "3.0.2",
+  "author": "@angelurrutdev",
+  "description": " An open-source Bolivars and Dollars Convert",
+  "license": "GPL-3.0-only",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

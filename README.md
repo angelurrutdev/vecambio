@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <a href="https://vecambio.vercel.app">
+    <img
+      src="https://raw.githubusercontent.com/angelurrutdev/vecambio/refs/heads/main/public/logo_svg.svg"
+      alt="VeCambio Logo"
+      height="64"
+    />
+  </a>
+  <p></p>
+  <p>
+    <b>
+      An open-source Bolivars and Dollars Convert built with NextJS.
+    </b>
+  </p>
 
-## Getting Started
+<a href="https://vecambio.vercel.app/">Convert</a>
+<span>&nbsp;&nbsp;❖&nbsp;&nbsp;</span>
+<a href="#-roadmap">Roadmap</a>
+<span>&nbsp;&nbsp;❖&nbsp;&nbsp;</span>
+<a href="#-getting-started">Contribute</a>
+<span>&nbsp;&nbsp;❖&nbsp;&nbsp;</span>
+<a href="https://github.com/angelrrutdev/vecambio/issues/new/choose">Create issue</a>
 
-First, run the development server:
+<div align="center">
+<a href="https://vecambio.vercel.app">
+<img src="public/screenshot_png.png">
+</a>
+<p></p>
+</div>
+
+![Next.js Badge](https://img.shields.io/badge/Next.js&nbsp;14-000?logo=nextdotjs&logoColor=fff&style=flat)
+![Check workflow](https://github.com/angelurrutdev/vecambio/actions/workflows/ci.yml/badge.svg)
+![GitHub stars](https://img.shields.io/github/stars/angelurrutdev/vecambio)
+![GitHub releases](https://img.shields.io/github/release/angelurrutdev/vecambio)
+![GitHub issues](https://img.shields.io/github/issues/angelurrutdev/vecambio)
+![GitHub license](https://img.shields.io/github/license/angelurrutdev/vecambio)
+
+</div>
+
+## 👨‍🚀 Introduction
+
+[**VeCambio**](vecambio.vercel.app) You can use this service for fast and easy currency conversions, it currently supports Bolivars, Dollars, Euros and other currencies, in a simple, quick and secure way. It is made with.[**NextJS**](https://nextjs.org/)
+
+This project uses the following technologies:
+
+- [**Next.js 15 App Router**](https://nextjs.org/) - The React Framework for the Web.
+- [**Next.js Server Actions**](https://nextjs.org/docs/api-reference/server-actions) - Asynchronous functions that are executed on the server.
+- [**TailwindCSS**](https://tailwindcss.com) + [**shadcn/ui**](https://ui.shadcn.com) & [**Radix Primitives**](https://www.radix-ui.com) - Design System.
+- [**Prettier**](https://prettier.io) with [**prettier-plugin-tailwindcss**](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) - Code Formatter.
+> ⚠️ This is a community project, not associated with [Vercel](https://vercel.com/).
+
+## 🚀 Getting Started
+
+**Requirements:**
+
+- [x] [Node.js](https://nodejs.org) (+v18.x) installed.
+- [x] [bun](https://bun.ih) (v1.2.4+) installed.
+- [x] [Visual Studio Code](https://code.visualstudio.com) with the recommended extensions installed (ESLint, Prettier, Tailwind CSS IntelliSense).
+
+**Steps:**
+
+1. Fork this project:
+
+- [Click here](https://github.com/angelurrutdev/vecambio/fork).
+
+2. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+git clone git@github.com:YOU_USER/vecambio.git
+```
+
+3. Install dependencies:
+
+```bash
+# Install bun globally if you don't have it:
+npm install -g bun
+
+# and install dependencies:
+bun install
+```
+
+4. Run:
+
+- Development server:
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+and open [http://localhost:3000](http://localhost:3000) with your browser 🚀
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔭 Roadmap
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is the roadmap I will be following for the complete migration to v3:
 
-## Learn More
+> - *✅* = Stable, completed.
+> - *🔔* = Stable, but unexpected errors may appear.
+> - *⚙️* = In progress.
 
-To learn more about Next.js, take a look at the following resources:
+## ✌️ Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<a href="https://github.com/angelurrutdev/vecambio/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=angelurrutdev/vecambio" />
+</a>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<p></p>
 
-## Deploy on Vercel
+## ☁️ Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ [vecambio.vercel.app](https://vecambio.vercel.app/).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔑 License
+
+- [GPL-3.0 license](https://github.com/pheralb/slug/blob/main/LICENSE).
