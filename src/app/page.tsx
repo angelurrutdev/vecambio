@@ -7,11 +7,10 @@ export const revalidate = 600
 export default async function Home() {
 	// Estas llamadas se ejecutan en el servidor
 	const setCurrencyDollar = await getCurrency('dollar')
-
 	// Renderizamos el contenido
 	return (
 		<>
-			<Calculator setCurrencyDollar={setCurrencyDollar} />
+			<Calculator {...setCurrencyDollar} />
 		</>
 	)
 }

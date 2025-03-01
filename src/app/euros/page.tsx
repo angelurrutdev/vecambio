@@ -10,7 +10,7 @@ export default async function Home() {
 	// Renderizamos el contenido
 	return (
 		<>
-			<Calculator setCurrencyDollar={setCurrencyDollar} />
+			<Calculator {...setCurrencyDollar} />
 		</>
 	)
 }

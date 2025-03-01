@@ -1,4 +1,5 @@
 'use client'
+import { APIDolarResponse } from '@/lib/index'
 import PreTitles from './PreTitles'
 import { Container } from './SectionContainer'
 
@@ -9,69 +10,7 @@ interface TasasItems {
 	currency: number
 }
 
-interface TasasProps {
-	setCurrencyDollar: {
-		datetime: {
-			date: string
-		}
-		monitors: {
-			promedio: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-			dolar_today: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-			binance: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-			amazon_gift_card: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-
-			cripto_dolar: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-
-			paypal: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-
-			skrill: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-
-			uphold: {
-				price: number
-				last_update: string
-				image: string
-				title: string
-			}
-		}
-	}
-}
-
-export default function Tasas({ setCurrencyDollar }: TasasProps) {
+export default function Tasas(setCurrencyDollar: APIDolarResponse) {
 	const tasa: TasasItems[] = [
 		{
 			title: setCurrencyDollar.monitors.dolar_today.title,

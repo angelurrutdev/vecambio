@@ -1,4 +1,6 @@
 'use client'
+import { APIDolarResponse } from '@/lib/index'
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { PillMount } from './PillMount'
@@ -10,23 +12,7 @@ import { InputContainer } from './InputContainer'
 import PreConverts from './PreConverts'
 import PreTitles from './PreTitles'
 
-type CalculatorProps = {
-	setCurrencyDollar: {
-		monitors: {
-			enparalelovzla: {
-				price: number
-			}
-			bcv: {
-				last_update: string
-				price: number
-			}
-			promedio: {
-				price: number
-			}
-		}
-	}
-}
-export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
+export default function Calculator(setCurrencyDollar: APIDolarResponse) {
 	// Estados
 	const [selectedRate, setSelectedRate] = useState<number>(
 		setCurrencyDollar.monitors.bcv.price,
@@ -229,7 +215,7 @@ export default function Calculator({ setCurrencyDollar }: CalculatorProps) {
 
 			<article className='text-center text-accent md:my-2 my-3 items-center flex flex-col'>
 				<p
-					className='text-5xl md:text-6xl font-semibold text-primario'
+					className='text-5xl md:text-6xl font-semibold text-primario flex'
 					id='mount'
 				>
 					{conversionResult}

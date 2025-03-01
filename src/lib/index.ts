@@ -13,3 +13,37 @@ export const getMonitorDollar = async (monitor: string) => {
 	return await res.json()
 }
 // https://pydolarve.org/api/v1/dollar?page=criptodolar?format_date=default
+
+export type APIDolarResponse = {
+	datetime: Datetime
+	monitors: { [key: string]: Monitor }
+}
+
+export type Datetime = {
+	date: string
+	time: string
+}
+
+export type Monitor = {
+	change: number
+	color: Color
+	image: string
+	last_update: string
+	percent: number
+	price: number
+	price_old: number
+	symbol: symbol
+	title: string
+}
+
+export enum Color {
+	Green = 'green',
+	Neutral = 'neutral',
+	Red = 'red',
+}
+
+export enum Symbol {
+	Empty = '▼',
+	Purple = '',
+	Symbol = '▲',
+}
