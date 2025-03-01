@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL('https://vecambio.vercel.app'),
 	title: {
 		default:
-			'VeCambio - Dolar Oficial BCV Paralelo a la tasa del día | Cambia tus dólares a bolivares y viceversa en tiempo real',
+			'VeCambio - Dolar Oficial BCV Paralelo a la tasa del día | Cambia tus dólares a bolivares en tiempo real',
 		template: '%v - VeCambio',
 	},
 	manifest: '/manifest.json',
@@ -41,28 +41,28 @@ export const metadata: Metadata = {
 			rel: 'icon',
 			type: 'image/png',
 			sizes: '32x32',
-			url: '/images/logo_png.png',
+			url: '/logo_png.png',
 		},
 		{
 			rel: 'icon',
 			type: 'image/svg+xml',
 			sizes: 'any',
-			url: '/images/logo_svg.svg',
+			url: '/logo_svg.svg',
 		},
 		{
 			rel: 'apple-touch-icon',
 			type: 'image/png',
 			sizes: '180x180',
-			url: '/images/apple-touch-icon.png',
+			url: '/apple-touch-icon.png',
 		},
 	],
 	description: 'Dolar Oficial BCV Paralelo a la tasa del día',
 	openGraph: {
 		title: 'VeCambio',
 		description: 'Dolar Oficial BCV Paralelo a la tasa del día',
-		url: 'https://VeCambio.vercel.app/images/og_image.png', // Ensure this path is correct
+		url: 'https://vecambio.vercel.app/og_image.png',
 		siteName: 'VeCambio - Dolar Oficial BCV Paralelo a la tasa del día',
-		locale: 'en_US',
+		locale: 'en_ES',
 		type: 'website',
 	},
 	robots: {
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
 
 // Viewport:
 export const viewport: Viewport = {
-	themeColor: '#171717',
+	themeColor: '#4ade80',
 }
 
 // App layout:
