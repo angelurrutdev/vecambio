@@ -69,8 +69,8 @@ export default function PreConverts({
 
 	return (
 		<article className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 text-primary-white gap-3 mt-4'>
-			<section className='mb-3 border-gray-200 border overflow-hidden block rounded-xl items-center'>
-				<div className='p-3  border-gray-200 border-b -mb-3 dark:bg-cuber-black bg-gray-200'>
+			<section className='mb-3 overflow-hidden block rounded-xl items-center'>
+				<div className='p-3   -mb-3 dark:bg-cuber-black bg-gray-200'>
 					<p className='text-base text-left flex items-center'>
 						{currencyInfo.Flag}
 						<strong className='mx-2'>
@@ -91,8 +91,8 @@ export default function PreConverts({
 				</div>
 			</section>
 
-			<section className='mb-3 border-gray-200 border overflow-hidden block rounded-xl items-center bg-gray-200'>
-				<div className='p-3 border-gray-200 border-b -mb-3 dark:bg-cuber-black'>
+			<section className='mb-3 overflow-hidden block rounded-xl items-center'>
+				<div className='p-3 -mb-3 dark:bg-cuber-black bg-gray-200'>
 					<p className='text-base text-left flex items-center'>
 						<VenezuelaIcon />
 						<strong className='mx-2'>Bs.S&nbsp;{formatNumber(Bolivar)}</strong>
@@ -100,7 +100,7 @@ export default function PreConverts({
 					</p>
 				</div>
 				<Arrows />
-				<div className=' p-3 -mt-3 dark:bg-cuber-black'>
+				<div className=' p-3 -mt-3 dark:bg-cuber-black bg-gray-200'>
 					<p className='text-base text-right flex items-center justify-end'>
 						a {currencyInfo.CurrencyTitle}
 						<strong className='mx-2'>
