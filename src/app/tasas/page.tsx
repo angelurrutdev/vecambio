@@ -1,7 +1,7 @@
 import Tasas from '@/components/OtherRates'
 import { getMonitorDollar } from '@/lib/index'
 
-export const revalidate = 600
+export const revalidate = 300
 
 export default async function Home() {
 	// Estas llamadas se ejecutan en el servidor
