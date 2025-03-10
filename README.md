@@ -19,7 +19,7 @@
 <span>&nbsp;&nbsp;❖&nbsp;&nbsp;</span>
 <a href="#-getting-started">Contribute</a>
 <span>&nbsp;&nbsp;❖&nbsp;&nbsp;</span>
-<a href="https://github.com/angelrrutdev/vecambio/issues/new/choose">Create issue</a>
+<a href="https://github.com/angelurrutdev/vecambio/issues/new/choose">Create issue</a>
 
 <div align="center">
 <a href="https://vecambio.vercel.app">
@@ -28,7 +28,7 @@
 <p></p>
 </div>
 
-![Next.js Badge](https://img.shields.io/badge/Next.js&nbsp;14-000?logo=nextdotjs&logoColor=fff&style=flat)
+![Next.js Badge](https://img.shields.io/badge/Next.js&nbsp;15-000?logo=nextdotjs&logoColor=fff&style=flat)
 ![Check workflow](https://github.com/angelurrutdev/vecambio/actions/workflows/ci.yml/badge.svg)
 ![GitHub stars](https://img.shields.io/github/stars/angelurrutdev/vecambio)
 ![GitHub releases](https://img.shields.io/github/release/angelurrutdev/vecambio)
@@ -47,6 +47,7 @@ This project uses the following technologies:
 - [**Next.js Server Actions**](https://nextjs.org/docs/api-reference/server-actions) - Asynchronous functions that are executed on the server.
 - [**TailwindCSS**](https://tailwindcss.com) + [**shadcn/ui**](https://ui.shadcn.com) & [**Radix Primitives**](https://www.radix-ui.com) - Design System.
 - [**Prettier**](https://prettier.io) with [**prettier-plugin-tailwindcss**](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) - Code Formatter.
+- [**PyDolar API**](https://pydolarve.org/) - API in use
 > ⚠️ This is a community project, not associated with [Vercel](https://vercel.com/).
 
 ## 🚀 Getting Started
@@ -111,4 +112,4 @@ This is the roadmap I will be following for the complete migration to v3:
 
 ## 🔑 License
 
-- [GPL-3.0 license](https://github.com/pheralb/slug/blob/main/LICENSE).
+- [GPL-3.0 license](https://github.com/angelurrutdev/vecambio/blob/main/LICENSE).
