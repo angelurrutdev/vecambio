@@ -15,26 +15,24 @@ export const getMonitorDollar = async (monitor: string) => {
 
 // https://pydolarve.org/api/v1/dollar?page=criptodolar?format_date=default
 
-
 export type APIDolarResponse = {
 	datetime: {
-	  date: string;
-	  time: string;
-	};
+		date: string
+		time: string
+	}
 	monitors: {
-	  [key: string]: Monitor;
-	};
-  };
-  
-  export type Monitor = {
-	change: number;
-	color: "green" | "red" | "neutral";
-	image: string | null;
-	last_update: string;
-	percent: number;
-	price: number;
-	price_old: number;
-	symbol: "▲" | "▼" | "";
-	title: string;
-  };
-  
+		[key: string]: Monitor
+	}
+}
+
+export type Monitor = {
+	change: number
+	color: 'green' | 'red' | 'neutral'
+	image: string
+	last_update: string
+	percent: number
+	price: number
+	price_old: number
+	symbol: '▲' | '▼' | ''
+	title: string
+}
