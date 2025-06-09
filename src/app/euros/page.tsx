@@ -1,16 +1,14 @@
 import Calculator from '@/components/Calculator'
 import { getCurrency } from '@/lib/index'
 
-// Configuración de revalidación: se actualizará cada 600 segundos = 10 minutos
 export const revalidate = 300
 
 export default async function Home() {
-	// Estas llamadas se ejecutan en el servidor
-	const setCurrencyDollar = await getCurrency('euro')
-	// Renderizamos el contenido
+	const setCurrencyDollar = await getCurrency('dollar')
+
 	return (
 		<>
-			<Calculator {...setCurrencyDollar} />
+			<Calculator monitors={setCurrencyDollar.monitors} />
 		</>
 	)
 }
